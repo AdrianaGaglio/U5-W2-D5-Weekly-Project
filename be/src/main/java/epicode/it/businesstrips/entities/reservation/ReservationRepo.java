@@ -13,5 +13,4 @@ public interface ReservationRepo extends JpaRepository<Reservation, Long> {
 
     public List<Reservation> findByEmployeeOrderByRequestDateDesc(Employee employee);
 
-
 }
