@@ -9,6 +9,7 @@ import {
   bootstrapGrid,
   bootstrapList,
   bootstrapListNested,
+  bootstrapPlus,
 } from '@ng-icons/bootstrap-icons';
 
 @NgModule({
@@ -17,7 +18,7 @@ import {
     CommonModule,
     EmployeesRoutingModule,
     CardModule,
-    NgIconsModule.withIcons({ bootstrapList, bootstrapGrid }),
+    NgIconsModule.withIcons({ bootstrapList, bootstrapGrid, bootstrapPlus }),
   ],
 })
 export class EmployeesModule {}

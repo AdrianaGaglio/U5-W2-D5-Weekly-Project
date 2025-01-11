@@ -4,4 +4,5 @@ export const environment = {
   reservationUrl: 'http://localhost:8080/reservations',
   uploadUrl: 'http://localhost:8080/upload',
   emailUrl: 'http://localhost:8080/email',
+  tripStatus: ['PLANNED', 'COMPLETED', 'CANCELLED'],
 };

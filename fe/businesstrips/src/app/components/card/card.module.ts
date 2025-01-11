@@ -9,9 +9,10 @@ import {
 } from '@ng-icons/bootstrap-icons';
 import { ModalModule } from '../modal/modal.module';
 import { CardHorComponent } from './card-hor/card-hor.component';
+import { TripCardComponent } from './trip-card/trip-card.component';
 
 @NgModule({
-  declarations: [CardComponent, CardHorComponent],
+  declarations: [CardComponent, CardHorComponent, TripCardComponent],
   imports: [
     CommonModule,
     NgIconsModule.withIcons({
@@ -20,6 +21,6 @@ import { CardHorComponent } from './card-hor/card-hor.component';
       bootstrapTrash,
     }),
   ],
-  exports: [CardComponent, CardHorComponent],
+  exports: [CardComponent, CardHorComponent, TripCardComponent],
 })
 export class CardModule {}

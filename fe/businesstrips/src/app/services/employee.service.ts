@@ -28,9 +28,19 @@ export class EmployeeService {
       .pipe(tap((result) => this.employees$.next(result.content)));
   }
 
+  create(employee: Partial<iEmployee>): Observable<iEmployee> {
+    return this.http
+      .post<iEmployee>(this.url, employee)
+      .pipe(
+        tap((res) => this.employees$.next([...this.employees$.getValue(), res]))
+      );
+  }
+
   delete(employee: iEmployee): Observable<string> {
     return this.http
-      .delete<string>(`${this.url}/${employee.id}`)
+      .delete<string>(`${this.url}/${employee.id}`, {
+        responseType: 'text' as 'json',
+      })
       .pipe(
         tap((res) =>
           this.employees$.next(

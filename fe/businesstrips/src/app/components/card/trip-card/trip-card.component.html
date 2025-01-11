@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">
+      {{ trip.destination | titlecase }}
+    </h5>
+    <span>Trip date: </span>
+    <p class="card-text fs-7">{{ trip.date }}</p>
+    <p class="card-text fs-7">
+      <span>Max capacity: </span> {{ trip.maxCapacity }}
+    </p>
+    <span>Status: </span>
+    <p class="card-text fs-7">{{ trip.status }}</p>
+    <div class="d-flex justify-content-evenly">
+      <button class="btn btn-primary">
+        <ng-icon name="bootstrapSearch"></ng-icon>
+      </button>
+      <button class="btn btn-warning text-light" (click)="openModal(trip)">
+        <ng-icon name="bootstrapPencil"></ng-icon>
+      </button>
+      <button class="btn btn-danger">
+        <ng-icon name="bootstrapTrash" (click)="delete(trip)"></ng-icon>
+      </button>
+    </div>
+  </div>
+</div>

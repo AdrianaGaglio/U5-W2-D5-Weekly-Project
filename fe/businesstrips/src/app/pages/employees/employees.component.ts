@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { PagetitleService } from '../../services/pagetitle.service';
 import { EmployeeService } from '../../services/employee.service';
 import { iEmployee } from '../../interfaces/iemployee';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../../components/modal/modal.component';
 
 @Component({
   selector: 'app-employees',
@@ -11,7 +13,8 @@ import { iEmployee } from '../../interfaces/iemployee';
 export class EmployeesComponent {
   constructor(
     private pageTitle: PagetitleService,
-    private employeeSvc: EmployeeService
+    private employeeSvc: EmployeeService,
+    private modalService: NgbModal
   ) {}
 
   employees!: iEmployee[];
@@ -28,16 +31,10 @@ export class EmployeesComponent {
   }
 
   grid() {
-    this.employeeSvc.getPagedEmployees(this.page, 5).subscribe((result) => {
-      this.iterations = Array(result.totalPages);
-    });
     this.isGrid = true;
   }
 
   list() {
-    this.employeeSvc.getEmployees().subscribe((result) => {
-      this.employees = result;
-    });
     this.isGrid = false;
   }
 
@@ -46,5 +43,10 @@ export class EmployeesComponent {
     this.employeeSvc.getPagedEmployees(this.page, 5).subscribe((result) => {
       this.employees = result.content;
     });
+  }
+
+  openModal(isEmployee: boolean) {
+    const modalRef = this.modalService.open(ModalComponent, { centered: true });
+    modalRef.componentInstance.isEmployee = isEmployee;
   }
 }
