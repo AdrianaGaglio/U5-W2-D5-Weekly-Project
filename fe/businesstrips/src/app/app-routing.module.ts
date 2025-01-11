@@ -22,7 +22,7 @@ const routes: Routes = [
       import('./pages/trips/trips.module').then((m) => m.TripsModule),
   },
   {
-    path: 'reservation',
+    path: 'reservations',
     loadChildren: () =>
       import('./pages/reservation/reservation.module').then(
         (m) => m.ReservationModule

@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../modal/modal.component';
 import { iTrip } from '../../../interfaces/itrip';
 import { TripService } from '../../../services/trip.service';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-trip-card',
@@ -14,6 +15,8 @@ import { TripService } from '../../../services/trip.service';
 export class TripCardComponent {
   constructor(private tripSvc: TripService, private modalService: NgbModal) {}
   message!: string;
+  editStatus: boolean = false;
+  tripStatus: string[] = environment.tripStatus;
 
   @Input() trip!: iTrip;
 
@@ -26,5 +29,17 @@ export class TripCardComponent {
   openModal(trip: iTrip) {
     const modalRef = this.modalService.open(ModalComponent, { centered: true });
     modalRef.componentInstance.trip = trip;
+  }
+
+  enableChange() {
+    this.editStatus = true;
+  }
+
+  changeStatus(event: Event) {
+    let status = (event.target as HTMLSelectElement).value;
+    this.tripSvc.changeStatus(this.trip.id, status).subscribe((res) => {
+      this.trip = res;
+      this.editStatus = false;
+    });
   }
 }

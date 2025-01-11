@@ -42,4 +42,11 @@ export class TripService {
   update(trip: Partial<iTrip>): Observable<iTrip> {
     return this.http.put<iTrip>(`${this.url}/${trip.id}`, trip);
   }
+
+  changeStatus(id: number, status: string): Observable<iTrip> {
+    return this.http.put<iTrip>(
+      `${this.url}/${id}/update?status=${status}`,
+      status
+    );
+  }
 }
