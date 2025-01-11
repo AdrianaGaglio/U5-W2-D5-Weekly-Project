@@ -4,9 +4,20 @@ import { CommonModule } from '@angular/common';
 import { EmployeesRoutingModule } from './employees-routing.module';
 import { EmployeesComponent } from './employees.component';
 import { CardModule } from '../../components/card/card.module';
+import { NgIconsModule } from '@ng-icons/core';
+import {
+  bootstrapGrid,
+  bootstrapList,
+  bootstrapListNested,
+} from '@ng-icons/bootstrap-icons';
 
 @NgModule({
   declarations: [EmployeesComponent],
-  imports: [CommonModule, EmployeesRoutingModule, CardModule],
+  imports: [
+    CommonModule,
+    EmployeesRoutingModule,
+    CardModule,
+    NgIconsModule.withIcons({ bootstrapList, bootstrapGrid }),
+  ],
 })
 export class EmployeesModule {}

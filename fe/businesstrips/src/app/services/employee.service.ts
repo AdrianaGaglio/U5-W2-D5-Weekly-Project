@@ -39,4 +39,8 @@ export class EmployeeService {
         )
       );
   }
+
+  update(employee: Partial<iEmployee>): Observable<iEmployee> {
+    return this.http.put<iEmployee>(`${this.url}/${employee.id}`, employee);
+  }
 }

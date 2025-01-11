@@ -1,0 +1,59 @@
+<div
+  class="custom-modal w-100 p-3 d-flex align-items-center justify-content-center"
+>
+  <form class="w-100" (submit)="save()">
+    <h5 class="mb-3">Update employee info</h5>
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        name="firstName"
+        [(ngModel)]="employee.firstName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        name="lastName"
+        [(ngModel)]="employee.lastName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        name="username"
+        [(ngModel)]="employee.username"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email:</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        [(ngModel)]="employee.email"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Profile image:</label>
+      <input
+        type="file"
+        class="form-control"
+        id="image"
+        name="image"
+        accept="image/png, image/jpeg"
+        (change)="onFileSelected($event)"
+      />
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+  </form>
+</div>

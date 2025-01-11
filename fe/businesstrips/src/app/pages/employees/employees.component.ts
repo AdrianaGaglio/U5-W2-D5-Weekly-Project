@@ -17,6 +17,7 @@ export class EmployeesComponent {
   employees!: iEmployee[];
   page: number = 0;
   iterations: number[] = [];
+  isGrid: boolean = true;
 
   ngOnInit() {
     this.pageTitle.title.next('Manage employees');
@@ -24,6 +25,20 @@ export class EmployeesComponent {
     this.employeeSvc.getPagedEmployees(this.page, 5).subscribe((result) => {
       this.iterations = Array(result.totalPages);
     });
+  }
+
+  grid() {
+    this.employeeSvc.getPagedEmployees(this.page, 5).subscribe((result) => {
+      this.iterations = Array(result.totalPages);
+    });
+    this.isGrid = true;
+  }
+
+  list() {
+    this.employeeSvc.getEmployees().subscribe((result) => {
+      this.employees = result;
+    });
+    this.isGrid = false;
   }
 
   changePage(num: number) {

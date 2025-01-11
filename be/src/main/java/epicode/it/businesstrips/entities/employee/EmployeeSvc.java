@@ -63,11 +63,15 @@ public class EmployeeSvc {
     public Employee update(Long id, @Valid EmployeeUpdateRequest request) {
         Employee e = getById(id);
 
-        if (request.getEmail() != null && employeeRepo.existsByEmail(request.getEmail().toLowerCase()))
+        Employee foundE = employeeRepo.findFirstByEmail(request.getEmail().toLowerCase());
+        boolean emailOk = foundE == null || !foundE.getId().equals(request.getId());
+        if (request.getEmail() != null && employeeRepo.existsByEmail(request.getEmail().toLowerCase()) && emailOk)
             throw new EntityExistsException("Email already exists");
         e.setEmail(request.getEmail() != null ? request.getEmail().toLowerCase() : e.getEmail());
 
-        if (request.getUsername() != null && employeeRepo.existsByUsername(request.getUsername().toLowerCase()))
+        Employee foundEn = employeeRepo.findFirstByUsername(request.getUsername().toLowerCase());
+        boolean usernameOk = foundEn == null || !foundEn.getId().equals(request.getId());
+        if (request.getUsername() != null && employeeRepo.existsByUsername(request.getUsername().toLowerCase()) && usernameOk)
             throw new EntityExistsException("Username already exists");
         e.setUsername(request.getUsername() != null ? request.getUsername().toLowerCase() : e.getUsername());
 

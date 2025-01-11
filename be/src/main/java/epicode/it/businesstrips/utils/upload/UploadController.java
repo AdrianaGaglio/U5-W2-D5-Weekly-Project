@@ -16,6 +16,6 @@ public class UploadController {
 
     @PostMapping(consumes = "multipart/form-data")
     public ResponseEntity<String> uploadFile(MultipartFile file) throws Exception {
-        return new ResponseEntity<>(uploadSvc.uploadFile(file), HttpStatus.CREATED);
+        return ResponseEntity.ok(uploadSvc.uploadFile(file));
     }
 }
