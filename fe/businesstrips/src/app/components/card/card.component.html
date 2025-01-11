@@ -1,0 +1,23 @@
+<div class="card">
+  <img [src]="employee.image" class="card-img-top" />
+  <div class="card-body">
+    <h5 class="card-title">
+      {{ employee.firstName | titlecase }} {{ employee.lastName | titlecase }}
+    </h5>
+    <span>Username: </span>
+    <p class="card-text fs-7">{{ employee.username }}</p>
+    <span>Email: </span>
+    <p class="card-text fs-7">{{ employee.email }}</p>
+    <div class="d-flex justify-content-evenly">
+      <button class="btn btn-primary">
+        <ng-icon name="bootstrapSearch"></ng-icon>
+      </button>
+      <button class="btn btn-warning text-light">
+        <ng-icon name="bootstrapPencil"></ng-icon>
+      </button>
+      <button class="btn btn-danger" (click)="delete(employee)">
+        <ng-icon name="bootstrapTrash"></ng-icon>
+      </button>
+    </div>
+  </div>
+</div>
