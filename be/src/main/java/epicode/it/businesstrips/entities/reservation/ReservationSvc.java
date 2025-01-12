@@ -38,6 +38,10 @@ public class ReservationSvc {
         return reservationRepo.findAll();
     }
 
+    public List<IReservationResponse> getAllResponse() {
+        return reservationRepo.findAllReservations();
+    }
+
     public Page<Reservation> getAllPageable(Pageable pageable) {
         return reservationRepo.findAll(pageable);
     }
@@ -67,7 +71,7 @@ public class ReservationSvc {
     }
 
     @Transactional
-    public Reservation create(ReservationCreateRequest request) {
+    public IReservationResponse create(ReservationCreateRequest request) {
         System.out.println(request);
         Reservation foundR = getByTripAndEmployee(request.getTripId(), request.getEmployeeId());
         if (foundR != null) throw new EntityExistsException("User already has a reservation for this trip");
@@ -91,11 +95,13 @@ public class ReservationSvc {
             }
         }
 
-        return reservationRepo.save(r);
+        r=reservationRepo.save(r);
+        return reservationRepo.findFirstReservationResponseById(r.getId());
     }
 
-    public List<Reservation> getByEmployee(Employee employee) {
-        return reservationRepo.findByEmployeeOrderByRequestDateDesc(employee);
+    public List<IReservationResponse> getByEmployee(Long id) {
+        Employee e = employeeSvc.getById(id);
+        return reservationRepo.findByEmployeeOrderByRequestDateDesc(e);
     }
 
     @Transactional

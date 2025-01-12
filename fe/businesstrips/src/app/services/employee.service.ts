@@ -28,11 +28,19 @@ export class EmployeeService {
       .pipe(tap((result) => this.employees$.next(result.content)));
   }
 
+  getById(id: number): Observable<iEmployee> {
+    return this.http.get<iEmployee>(`${this.url}/${id}`);
+  }
+
   create(employee: Partial<iEmployee>): Observable<iEmployee> {
     return this.http
       .post<iEmployee>(this.url, employee)
       .pipe(
-        tap((res) => this.employees$.next([...this.employees$.getValue(), res]))
+        tap((res) =>
+          this.getEmployees().subscribe((employees) =>
+            this.employees$.next(employees)
+          )
+        )
       );
   }
 
@@ -43,14 +51,22 @@ export class EmployeeService {
       })
       .pipe(
         tap((res) =>
-          this.employees$.next(
-            this.employees$.getValue().filter((e) => e.id !== employee.id)
+          this.getEmployees().subscribe((employees) =>
+            this.employees$.next(employees)
           )
         )
       );
   }
 
   update(employee: Partial<iEmployee>): Observable<iEmployee> {
-    return this.http.put<iEmployee>(`${this.url}/${employee.id}`, employee);
+    return this.http
+      .put<iEmployee>(`${this.url}/${employee.id}`, employee)
+      .pipe(
+        tap((result) =>
+          this.getEmployees().subscribe((result) =>
+            this.employees$.next(result)
+          )
+        )
+      );
   }
 }

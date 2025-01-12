@@ -10,9 +10,16 @@ import {
 import { ModalModule } from '../modal/modal.module';
 import { CardHorComponent } from './card-hor/card-hor.component';
 import { TripCardComponent } from './trip-card/trip-card.component';
+import { RouterLink } from '@angular/router';
+import { ResCardComponent } from './res-card/res-card.component';
 
 @NgModule({
-  declarations: [CardComponent, CardHorComponent, TripCardComponent],
+  declarations: [
+    CardComponent,
+    CardHorComponent,
+    TripCardComponent,
+    ResCardComponent,
+  ],
   imports: [
     CommonModule,
     NgIconsModule.withIcons({
@@ -20,7 +27,13 @@ import { TripCardComponent } from './trip-card/trip-card.component';
       bootstrapPencil,
       bootstrapTrash,
     }),
+    RouterLink,
   ],
-  exports: [CardComponent, CardHorComponent, TripCardComponent],
+  exports: [
+    CardComponent,
+    CardHorComponent,
+    TripCardComponent,
+    ResCardComponent,
+  ],
 })
 export class CardModule {}

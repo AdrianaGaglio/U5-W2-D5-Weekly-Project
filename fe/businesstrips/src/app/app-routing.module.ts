@@ -28,6 +28,16 @@ const routes: Routes = [
         (m) => m.ReservationModule
       ),
   },
+  {
+    path: 'employee/:id',
+    loadChildren: () =>
+      import('./pages/employee/employee.module').then((m) => m.EmployeeModule),
+  },
+  {
+    path: 'trip/:id',
+    loadChildren: () =>
+      import('./pages/trip/trip.module').then((m) => m.TripModule),
+  },
 ];
 
 @NgModule({

@@ -10,10 +10,15 @@
     </p>
     <span>Status: </span>
     <p
-      class="card-text fs-7"
+      class="card-text fs-7 fw-bold"
       role="button"
       (click)="enableChange()"
       *ngIf="!editStatus"
+      [ngClass]="{
+        'text-success': trip.status === 'COMPLETED',
+        'text-danger': trip.status === 'CANCELLED',
+        'text-warning': trip.status === 'PLANNED'
+      }"
     >
       {{ trip.status }}
     </p>
@@ -29,9 +34,9 @@
       </option>
     </select>
     <div class="d-flex justify-content-evenly mt-2">
-      <button class="btn btn-primary">
+      <a class="btn btn-primary" [routerLink]="['/trip', trip.id]">
         <ng-icon name="bootstrapSearch"></ng-icon>
-      </button>
+      </a>
       <button class="btn btn-warning text-light" (click)="openModal(trip)">
         <ng-icon name="bootstrapPencil"></ng-icon>
       </button>

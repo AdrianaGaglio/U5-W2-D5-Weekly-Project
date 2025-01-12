@@ -9,9 +9,9 @@
     <span>Email: </span>
     <p class="card-text fs-7">{{ employee.email }}</p>
     <div class="d-flex justify-content-evenly">
-      <button class="btn btn-primary">
+      <a class="btn btn-primary" [routerLink]="['/employee', employee.id]">
         <ng-icon name="bootstrapSearch"></ng-icon>
-      </button>
+      </a>
       <button class="btn btn-warning text-light" (click)="openModal(employee)">
         <ng-icon name="bootstrapPencil"></ng-icon>
       </button>

@@ -24,13 +24,18 @@ export class EmployeesComponent {
 
   ngOnInit() {
     this.pageTitle.title.next('Manage employees');
-    this.employeeSvc.employees$.subscribe((res) => (this.employees = res));
-    this.employeeSvc.getPagedEmployees(this.page, 5).subscribe((result) => {
+    this.employeeSvc.employees$.subscribe((res) => {
+      this.employees = res;
+    });
+    this.employeeSvc.getPagedEmployees(this.page, 10).subscribe((result) => {
       this.iterations = Array(result.totalPages);
     });
   }
 
   grid() {
+    this.employeeSvc.getPagedEmployees(this.page, 10).subscribe((result) => {
+      this.employees = result.content;
+    });
     this.isGrid = true;
   }
 
@@ -40,7 +45,7 @@ export class EmployeesComponent {
 
   changePage(num: number) {
     this.page = num;
-    this.employeeSvc.getPagedEmployees(this.page, 5).subscribe((result) => {
+    this.employeeSvc.getPagedEmployees(this.page, 10).subscribe((result) => {
       this.employees = result.content;
     });
   }

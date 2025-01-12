@@ -10,7 +10,9 @@
     <p class="card-text fs-7">{{ employee.email }}</p>
   </div>
   <div class="d-flex flex-column justify-content-evenly p-1">
-    <button class="btn btn-primary">Manage reservation</button>
+    <a class="btn btn-primary" [routerLink]="['/employee', employee.id]"
+      >Manage reservation</a
+    >
     <button class="btn btn-warning text-light" (click)="openModal(employee)">
       Change info
     </button>

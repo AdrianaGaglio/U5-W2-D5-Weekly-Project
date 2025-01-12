@@ -14,12 +14,14 @@
         routerLink="/"
         routerLinkActive="active"
         class="list-group-item list-group-item-action border-0"
+        (click)="offcanvas.dismiss('Cross click')"
         >Admin Dashboard</a
       >
       <a
         routerLink="/employees"
         routerLinkActive="active"
         class="list-group-item list-group-item-action border-0"
+        (click)="offcanvas.dismiss('Cross click')"
         >Manage Employees</a
       >
 
@@ -27,6 +29,7 @@
         routerLink="/trips"
         routerLinkActive="active"
         class="list-group-item list-group-item-action border-0"
+        (click)="offcanvas.dismiss('Cross click')"
         >Manage Trips</a
       >
 
@@ -34,6 +37,7 @@
         routerLink="/reservations"
         routerLinkActive="active"
         class="list-group-item list-group-item-action border-0"
+        (click)="offcanvas.dismiss('Cross click')"
         >Manage Reservations</a
       >
     </div>

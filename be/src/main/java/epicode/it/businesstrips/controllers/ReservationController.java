@@ -1,6 +1,8 @@
 package epicode.it.businesstrips.controllers;
 
+import epicode.it.businesstrips.entities.employee.Employee;
 import epicode.it.businesstrips.entities.preference.PreferenceAddRequest;
+import epicode.it.businesstrips.entities.reservation.IReservationResponse;
 import epicode.it.businesstrips.entities.reservation.Reservation;
 import epicode.it.businesstrips.entities.reservation.ReservationCreateRequest;
 import epicode.it.businesstrips.entities.reservation.ReservationSvc;
@@ -20,8 +22,8 @@ public class ReservationController {
     private final ReservationSvc reservationSvc;
 
     @GetMapping
-    public ResponseEntity<List<Reservation>> getAll() {
-        return ResponseEntity.ok(reservationSvc.getAll());
+    public ResponseEntity<List<IReservationResponse>> getAll() {
+        return ResponseEntity.ok(reservationSvc.getAllResponse());
     }
 
     @GetMapping("/paged")
@@ -40,7 +42,7 @@ public class ReservationController {
     }
 
     @PostMapping
-    public ResponseEntity<Reservation> create(@RequestBody ReservationCreateRequest request) {
+    public ResponseEntity<IReservationResponse> create(@RequestBody ReservationCreateRequest request) {
         return new ResponseEntity<>(reservationSvc.create(request), HttpStatus.CREATED);
     }
 
@@ -48,5 +50,10 @@ public class ReservationController {
     public ResponseEntity<Reservation> addPreference(@PathVariable Long id, @RequestBody PreferenceAddRequest
             request) {
         return new ResponseEntity<>(reservationSvc.addPreference(id, request), HttpStatus.OK);
+    }
+
+    @GetMapping("/employee/{id}")
+    public ResponseEntity<List<IReservationResponse>> getByEmployee(@PathVariable Long id) {
+        return ResponseEntity.ok(reservationSvc.getByEmployee(id));
     }
 }

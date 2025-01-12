@@ -19,6 +19,10 @@ export class TripService {
       .pipe(tap((trips) => this.trips$.next(trips)));
   }
 
+  getById(id: number): Observable<iTrip> {
+    return this.http.get<iTrip>(`${this.url}/${id}`);
+  }
+
   delete(trip: iTrip): Observable<string> {
     return this.http
       .delete<string>(`${this.url}/${trip.id}`, {
@@ -26,9 +30,9 @@ export class TripService {
       })
       .pipe(
         tap((res) =>
-          this.trips$.next(
-            this.trips$.getValue().filter((t) => t.id !== trip.id)
-          )
+          this.getTrips().subscribe((trips) => {
+            this.trips$.next(trips);
+          })
         )
       );
   }
@@ -36,7 +40,9 @@ export class TripService {
   create(trip: Partial<iTrip>): Observable<iTrip> {
     return this.http
       .post<iTrip>(this.url, trip)
-      .pipe(tap((res) => this.trips$.next([...this.trips$.getValue(), res])));
+      .pipe(
+        tap((res) => this.getTrips().subscribe((res) => this.trips$.next(res)))
+      );
   }
 
   update(trip: Partial<iTrip>): Observable<iTrip> {
@@ -44,9 +50,12 @@ export class TripService {
   }
 
   changeStatus(id: number, status: string): Observable<iTrip> {
-    return this.http.put<iTrip>(
-      `${this.url}/${id}/update?status=${status}`,
-      status
-    );
+    return this.http
+      .put<iTrip>(`${this.url}/${id}/update?status=${status}`, status)
+      .pipe(
+        tap((result) =>
+          this.getTrips().subscribe((res) => this.trips$.next(res))
+        )
+      );
   }
 }

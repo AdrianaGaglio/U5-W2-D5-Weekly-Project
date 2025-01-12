@@ -36,9 +36,10 @@ export class ModalComponent {
   selectedFile!: File;
 
   ngOnInit() {
-    if (this.trip) {
+    if ((this.trip && !this.employee) || this.trip.id) {
       this.isTrip = true;
-    } else if (this.employee) {
+    }
+    if ((this.employee && !this.trip) || this.employee.id) {
       this.isEmployee = true;
     }
   }
@@ -64,6 +65,7 @@ export class ModalComponent {
           this.employeeSvc.update(this.employee).subscribe((res) => {
             setTimeout(() => this.activeModal.close(), 1000);
           });
+          this.employeeSvc.getEmployees().subscribe();
         }
       });
     }
@@ -82,6 +84,7 @@ export class ModalComponent {
           this.employee.image = res;
           this.employeeSvc.create(this.employee).subscribe((res) => {
             setTimeout(() => this.activeModal.close(), 1000);
+            this.employeeSvc.getEmployees().subscribe();
           });
         }
       });
@@ -89,6 +92,7 @@ export class ModalComponent {
   }
 
   addTrip() {
+    this.trip.date = this.trip.date?.toString().slice(0, 10);
     this.tripSvc.create(this.trip).subscribe((res) => {
       setTimeout(() => this.activeModal.close(), 1000);
     });
