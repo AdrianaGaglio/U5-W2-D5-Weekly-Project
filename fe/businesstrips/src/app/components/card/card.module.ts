@@ -12,6 +12,7 @@ import { CardHorComponent } from './card-hor/card-hor.component';
 import { TripCardComponent } from './trip-card/trip-card.component';
 import { RouterLink } from '@angular/router';
 import { ResCardComponent } from './res-card/res-card.component';
+import { TripHorCardComponent } from './trip-hor-card/trip-hor-card.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ResCardComponent } from './res-card/res-card.component';
     CardHorComponent,
     TripCardComponent,
     ResCardComponent,
+    TripHorCardComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { ResCardComponent } from './res-card/res-card.component';
     CardHorComponent,
     TripCardComponent,
     ResCardComponent,
+    TripHorCardComponent,
   ],
 })
 export class CardModule {}

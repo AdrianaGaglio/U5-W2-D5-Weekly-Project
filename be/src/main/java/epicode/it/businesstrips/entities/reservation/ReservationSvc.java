@@ -114,4 +114,9 @@ public class ReservationSvc {
         r.getPreferences().add(p);
         return save(r);
     }
+
+    public List<IReservationResponse> findByTrip(Long id) {
+        Trip t = tripSvc.getById(id);
+        return reservationRepo.findFirstByTripIReservationResponse(t);
+    }
 }

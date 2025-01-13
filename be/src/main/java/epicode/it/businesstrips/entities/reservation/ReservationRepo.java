@@ -21,6 +21,14 @@ public interface ReservationRepo extends JpaRepository<Reservation, Long> {
 """)
     List<IReservationResponse> findAllReservations();
 
+
+    @Query("""
+       SELECT r
+       FROM Reservation r
+       WHERE r.trip = :trip
+       """)
+    List<IReservationResponse> findFirstByTripIReservationResponse(@Param("trip") Trip trip);
+
     public Reservation findFirstByTripAndEmployee(Trip trip, Employee employee);
 
     @Query("""

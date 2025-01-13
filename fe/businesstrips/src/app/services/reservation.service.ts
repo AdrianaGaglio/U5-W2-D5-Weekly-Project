@@ -69,4 +69,8 @@ export class ReservationService {
         )
       );
   }
+
+  getByTrip(tripId: number): Observable<IReservationresponse[]> {
+    return this.http.get<IReservationresponse[]>(`${this.url}/trip/${tripId}`);
+  }
 }

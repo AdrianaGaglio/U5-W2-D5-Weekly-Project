@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { iTrip } from '../interfaces/itrip';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { IReservationresponse } from '../interfaces/ireservationresponse';
 
 @Injectable({
   providedIn: 'root',

@@ -6,6 +6,7 @@ import epicode.it.businesstrips.entities.reservation.IReservationResponse;
 import epicode.it.businesstrips.entities.reservation.Reservation;
 import epicode.it.businesstrips.entities.reservation.ReservationCreateRequest;
 import epicode.it.businesstrips.entities.reservation.ReservationSvc;
+import epicode.it.businesstrips.entities.trip.Trip;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,5 +56,10 @@ public class ReservationController {
     @GetMapping("/employee/{id}")
     public ResponseEntity<List<IReservationResponse>> getByEmployee(@PathVariable Long id) {
         return ResponseEntity.ok(reservationSvc.getByEmployee(id));
+    }
+
+    @GetMapping("trip/{tripId}")
+    public ResponseEntity<List<IReservationResponse>> getByTrip(@PathVariable Long tripId) {
+        return ResponseEntity.ok(reservationSvc.findByTrip(tripId));
     }
 }
